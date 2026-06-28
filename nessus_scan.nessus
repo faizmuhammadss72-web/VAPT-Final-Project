@@ -1,0 +1,53 @@
+# Nessus Vulnerability Scan Results
+# Policy: Advanced Network Scan
+# Date: June 17, 2026
+
+Plugin ID: 119353
+Name: MS19-0708: BlueKeep Remote Code Execution
+Host: 192.168.1.30
+Port: 3389/tcp
+Severity: CRITICAL
+CVSS Score: 9.8
+CVE: CVE-2019-0708
+Description: The remote Windows host is affected by a remote code execution vulnerability in Remote Desktop Protocol.
+Solution: Apply Microsoft security update KB4499175.
+
+Plugin ID: 100322
+Name: MySQL Empty Root Password
+Host: 192.168.1.20
+Port: 3306/tcp
+Severity: CRITICAL
+CVSS Score: 9.1
+CVE: CVE-2021-2144
+Description: The MySQL root account has no password configured.
+Solution: Set a strong password for the root account.
+
+Plugin ID: 100981
+Name: SMBGhost Remote Code Execution
+Host: 192.168.1.30
+Port: 445/tcp
+Severity: CRITICAL
+CVSS Score: 9.8
+CVE: CVE-2020-0796
+Description: SMBv3.1.1 is vulnerable to remote code execution.
+Solution: Apply Microsoft security update KB4551762.
+
+Plugin ID: 119948
+Name: Apache Path Traversal
+Host: 192.168.1.10
+Port: 80/tcp
+Severity: HIGH
+CVSS Score: 7.5
+CVE: CVE-2021-41773
+Description: Apache HTTP Server 2.4.49 is vulnerable to path traversal.
+Solution: Upgrade to Apache 2.4.51 or later.
+
+Plugin ID: 102445
+Name: OpenSSH User Enumeration
+Host: 192.168.1.20
+Port: 22/tcp
+Severity: HIGH
+CVSS Score: 7.8
+CVE: CVE-2020-15778
+Description: OpenSSH allows user enumeration via timing attacks.
+Solution: Upgrade to OpenSSH 8.4 or later.

